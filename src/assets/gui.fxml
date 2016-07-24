@@ -7,7 +7,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rombus.evilbones.lmg.Main">
    <children>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
          <tabs>
             <Tab text="Server">
                <content>
@@ -93,12 +93,12 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="stopBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="STOP">
+                                    <Button fx:id="stopBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="STOP">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="rewBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="REW">
+                                    <Button fx:id="rewBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="REW">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -117,6 +117,11 @@
                                        </HBox.margin>
                                     </Button>
                                     <Button fx:id="ustaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="USTA">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="removeBtn" mnemonicParsing="false" text="REMOVE">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>

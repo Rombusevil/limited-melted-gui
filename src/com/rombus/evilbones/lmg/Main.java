@@ -56,6 +56,7 @@ public class Main extends Application implements Initializable {
 	@FXML private Button sendCmdBtn;
 	@FXML private Button clearCmdBtn;
 	@FXML private Button shutdownBtn;
+	@FXML private Button removeBtn;
 	
 	private String unit = "U0"; // Default unit
 	private TelnetSession session;
@@ -216,6 +217,13 @@ public class Main extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				sendCommand("WIPE "+unit);
+			}
+		});
+		
+		removeBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				sendCommand("REMOVE "+unit);
 			}
 		});
 		
