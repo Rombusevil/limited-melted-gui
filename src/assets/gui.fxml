@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rombus.evilbones.lmg.Main">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Server">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="600.0">
+                     <children>
+                        <VBox layoutX="9.0" layoutY="9.0" prefHeight="92.0" prefWidth="259.0" AnchorPane.topAnchor="9.0">
+                           <children>
+                              <HBox prefHeight="33.0" prefWidth="259.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="78.0" text="Hostname" />
+                                    <TextField fx:id="hostnameInput" text="localhost" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="32.0" prefWidth="259.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="79.0" text="Port" />
+                                    <TextField fx:id="portInput" prefHeight="25.0" prefWidth="170.0" text="5250" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="26.0" prefWidth="259.0">
+                                 <children>
+                                    <Button fx:id="connectBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Connect">
+                                       <HBox.margin>
+                                          <Insets left="82.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="disconnectBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Disconnect">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Media">
+               <content>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <VBox layoutX="14.0" layoutY="10.0">
+                           <children>
+                              <HBox prefHeight="35.0" prefWidth="582.0">
+                                 <children>
+                                    <Label prefHeight="33.0" prefWidth="73.0" text="Producer" />
+                                    <TextField fx:id="producerInput" minHeight="-Infinity" prefHeight="31.0" prefWidth="501.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="19.0" prefWidth="582.0">
+                                 <children>
+                                    <Button fx:id="loadBtn" mnemonicParsing="false" text="LOAD">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="apndBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="APND" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="19.0" prefWidth="582.0">
+                                 <children>
+                                    <Button fx:id="playBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="PLAY">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="pauseBtn" mnemonicParsing="false" text="PAUSE">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="stopBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="STOP">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="rewBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="REW">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="ffBtn" mnemonicParsing="false" text="FF" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="listBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="LIST">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="ustaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="USTA">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="cleanBtn" mnemonicParsing="false" text="CLEAN">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="wipeBtn" mnemonicParsing="false" text="WIPE">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="shutdownBtn" mnemonicParsing="false" text="SHUTDOWN">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="8.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Terminal">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="600.0">
+                     <children>
+                        <VBox prefHeight="149.0" prefWidth="600.0">
+                           <children>
+                              <TextArea fx:id="cmdInput" prefHeight="82.0" prefWidth="590.0" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="sendCmdBtn" mnemonicParsing="false" text="Send" />
+                                    <Button fx:id="clearCmdBtn" mnemonicParsing="false" text="Clear">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <VBox alignment="BOTTOM_LEFT">
+         <children>
+            <TextArea fx:id="outputText">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin></TextArea>
+         </children>
+         <VBox.margin>
+            <Insets top="2.0" />
+         </VBox.margin>
+      </VBox>
+      <Button fx:id="cleanLogBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" text="Clean log" VBox.vgrow="NEVER">
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>
