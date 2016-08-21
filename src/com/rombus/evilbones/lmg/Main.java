@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.rombus.evilbones.lmg.I_SessionNotifier.Commands;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -60,12 +62,12 @@ public class Main extends Application implements Initializable {
 	
 	private String unit = "U0"; // Default unit
 	private TelnetSession session;
-	private SessionNotifier notifier;
+	private I_SessionNotifier notifier;
 	
 	
 	//Start javafx app
 	public static void main(String[] args) {
-		launch(args);	
+		launch(args);
 	}
 	
 	@Override
@@ -90,17 +92,8 @@ public class Main extends Application implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		notifier = new SessionNotifier() {
-			@Override
-			public void writeOutput(final String msg) {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						outputText.appendText(msg+"\n");
-					}
-				});		
-			}
-		};
+		notifier = new SessionNotifier(outputText);
+		outputText.setStyle("-fx-font-family: monospace");
 		
 		setDragDrop(producerInput, true);
 		setDragDrop(cmdInput, false);		
@@ -195,6 +188,7 @@ public class Main extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				sendCommand("USTA "+unit);
+				notifier.setSentMsg(Commands.USTA);
 			}
 		});
 		
@@ -253,6 +247,7 @@ public class Main extends Application implements Initializable {
 	private void sendCommand(String command){
 		try {
 			this.session.sendCommand(command);
+			
 			notifier.writeOutput(">> "+command);
 		} catch (NullPointerException e) {
 			notifier.writeOutput("Not connected to melted!!!");

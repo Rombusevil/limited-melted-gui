@@ -12,10 +12,10 @@ import java.io.IOException;
  */
 public class SessionListener implements Runnable {
 	private boolean keepListening;
-	private SessionNotifier notifier;
+	private I_SessionNotifier notifier;
 	private BufferedReader socketIn;
 	
-	public SessionListener(BufferedReader socketIn, SessionNotifier notifier){
+	public SessionListener(BufferedReader socketIn, I_SessionNotifier notifier){
 		this.keepListening = true;
 		this.socketIn = socketIn;
 		this.notifier = notifier;

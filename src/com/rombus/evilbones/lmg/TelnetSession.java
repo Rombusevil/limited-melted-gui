@@ -25,13 +25,13 @@ public class TelnetSession {
 	private SessionListener listener;
 	private Thread listenerThread;
 	
-	public TelnetSession(String server, int port, SessionNotifier notifier) throws UnknownHostException, IOException{
+	public TelnetSession(String server, int port, I_SessionNotifier notifier) throws UnknownHostException, IOException{
 		this.port = port;
 		this.hostName = server;
 		connect(notifier);
 	}
 	
-	public void connect(SessionNotifier notifier) throws UnknownHostException, IOException{
+	public void connect(I_SessionNotifier notifier) throws UnknownHostException, IOException{
 		this.meltedServer = new Socket(this.hostName, this.port);
 		
 		this.send = new PrintWriter(meltedServer.getOutputStream(), true);
