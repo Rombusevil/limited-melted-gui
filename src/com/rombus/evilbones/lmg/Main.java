@@ -173,7 +173,7 @@ public class Main extends Application implements Initializable {
 		listBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				sendCommand("LIST "+unit);
+				sendCommand("LIST "+unit, Commands.LIST);
 			}
 		});
 		
@@ -187,8 +187,7 @@ public class Main extends Application implements Initializable {
 		ustaBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				sendCommand("USTA "+unit);
-				notifier.setSentMsg(Commands.USTA);
+				sendCommand("USTA "+unit, Commands.USTA);
 			}
 		});
 		
@@ -247,12 +246,25 @@ public class Main extends Application implements Initializable {
 	private void sendCommand(String command){
 		try {
 			this.session.sendCommand(command);
+			notifier.setSentMsg(Commands.NO_CMD); // Por defecto mando NO_CMD
 			
 			notifier.writeOutput(">> "+command);
 		} catch (NullPointerException e) {
 			notifier.writeOutput("Not connected to melted!!!");
 		}
 	}
+	private void sendCommand(String command, Commands cmd){
+		try {
+			this.session.sendCommand(command);
+			notifier.setSentMsg(cmd);
+			
+			notifier.writeOutput(">> "+command);
+		} catch (NullPointerException e) {
+			notifier.writeOutput("Not connected to melted!!!");
+		}
+	}
+	
+	
 	
 	// Helper method for activating drag&drop on TextInputControl components.
 	private void setDragDrop(final TextInputControl target, final boolean erasePreviousText){

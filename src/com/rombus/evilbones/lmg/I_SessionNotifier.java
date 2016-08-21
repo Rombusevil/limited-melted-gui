@@ -7,9 +7,9 @@ package com.rombus.evilbones.lmg;
  */
 public interface I_SessionNotifier {
 
-	// Por ahora solo quiero diferenciar el USTA de los demás, por eso está este solo
+	// Por ahora solo quiero diferenciar el USTA y LIST de los demás, por eso están esos solos
 	public enum Commands{
-		USTA
+		USTA, LIST, NO_CMD
 	}
 	
 	public void writeOutput(String msg);

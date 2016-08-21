@@ -11,9 +11,12 @@ import javafx.scene.control.TextArea;
 public class SessionNotifier implements I_SessionNotifier{
 	private TextArea outputText;
 	private I_SessionNotifier.Commands executedCommand;
+	private int msgCounter; // Helper para interpretar respuestas que tienen más de un mensaje
 	
 	public SessionNotifier(TextArea outputText){
 		this.outputText = outputText;
+		this.executedCommand = Commands.NO_CMD;
+		this.msgCounter = 0;
 	}
 
 	@Override
@@ -27,19 +30,21 @@ public class SessionNotifier implements I_SessionNotifier{
 					return;
 				}
 				
-				// Si mandó un USTA
-				if(executedCommand == Commands.USTA){
+				
+				switch(executedCommand){
+				case USTA:
+					System.out.println("case usta");
 					// Muestro el mensaje de OK
-					if(msg.contains("OK")){
+					if(msg.contains(" OK")){
 						outputText.appendText(msg+"\n");
 					}
 					// Proceso la respuesta del USTA
 					else {
-						String []msgs = msg.split(" ");
+						String msgs[] = msg.split(" ");
 						
-						if(msgs.length == 17) {
-							//outputText.appendText("UNIT: "+msgs[0]+"\n");
+						if(msgs.length == 17) {	//Valido que haya sido OK la respuesta, si no tiene todos estos campos fue fail
 							outputText.appendText("\n");
+							//outputText.appendText("UNIT: "+msgs[0]+"\n"); // No lo muestro pq ya se que es la U0
 							outputText.appendText("  mode:\t\t\t"+msgs[1]+"\n");
 							outputText.appendText("  path:\t\t\t"+msgs[2]+"\n");
 							outputText.appendText("  cur frame:\t\t"+msgs[3]+"\n");
@@ -59,16 +64,47 @@ public class SessionNotifier implements I_SessionNotifier{
 							outputText.appendText("\n");
 						}
 						else{
+							System.out.println("else");
 							outputText.appendText(msg+"\n");		
 						}
-						
-						executedCommand = null;	
 					}
-				}
-				else {
+					break;
+				
+				case LIST:
+					// Muestro el mensaje de OK
+					if(msg.contains(" OK")){
+						outputText.appendText(msg+"\n");
+						msgCounter = 0;
+					}
+					// Proceso la respuesta del USTA
+					else if (msgCounter == 0){
+						msgCounter++;
+						outputText.appendText("\n");
+						outputText.appendText("Playlist #: "+msg+"\n\n");
+					}
+					else {
+						msgCounter++;	// Son multiples mensajes que tengo que procesar
+						String msgs[] = msg.split(" ");
+						
+						if(msgs.length == 7) {	//Valido que haya sido OK la respuesta, si no tiene todos estos campos fue fail
+							outputText.appendText("--------------------\n");
+							outputText.appendText("  clip index:\t\t"+msgs[0]+"\n"); // No lo muestro pq ya se que es la U0
+							outputText.appendText("  path:\t\t\t"+msgs[1]+"\n");
+							outputText.appendText("  in-point:\t\t"+msgs[2]+"\n");
+							outputText.appendText("  out-point:\t\t"+msgs[3]+"\n");
+							outputText.appendText("  length:\t\t"+msgs[4]+"\n");
+							outputText.appendText("  calculated len:\t"+msgs[5]+"\n");
+							outputText.appendText("  fps:\t\t\t"+msgs[6]+"\n");
+						}
+						else{
+							outputText.appendText(msg+"\n");		
+						}
+					}
+					break;
+					
+				default:
 					outputText.appendText(msg+"\n");
-					executedCommand = null;
-				}
+				}	
 			}
 		});		
 	}
