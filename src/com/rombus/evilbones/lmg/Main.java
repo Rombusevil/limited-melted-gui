@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.rombus.evilbones.lmg.I_SessionNotifier.Commands;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -15,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -26,6 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import com.rombus.evilbones.lmg.I_SessionNotifier.Commands;
+
 /**
  * Simple GUI for issuing commands to a melted server over Telnet.
  * Works with the default preview unit "U0".
@@ -35,6 +36,7 @@ import javafx.stage.WindowEvent;
  * 23/07/2016 14:13:39
  */
 public class Main extends Application implements Initializable {
+	@FXML private TabPane tabPane;
 	@FXML private TextField hostnameInput;
 	@FXML private TextField portInput;	
 	@FXML private TextField producerInput;
@@ -97,7 +99,12 @@ public class Main extends Application implements Initializable {
 		
 		setDragDrop(producerInput, true);
 		setDragDrop(cmdInput, false);		
+				
+		// Pongo como activa la tab de MEDIA
+		tabPane.getSelectionModel().select(1);
 		
+		
+		// Defino los botones
 		connectBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -111,6 +118,9 @@ public class Main extends Application implements Initializable {
 				}
 			}
 		});
+		
+		// Intento conectarme ni bien abrís la app
+		connectBtn.fire();
 		
 		disconnectBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
