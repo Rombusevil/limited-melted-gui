@@ -33,7 +33,6 @@ public class SessionNotifier implements I_SessionNotifier{
 				
 				switch(executedCommand){
 				case USTA:
-					System.out.println("case usta");
 					// Muestro el mensaje de OK
 					if(msg.contains(" OK")){
 						outputText.appendText(msg+"\n");
