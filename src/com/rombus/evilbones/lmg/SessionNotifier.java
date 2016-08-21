@@ -80,7 +80,7 @@ public class SessionNotifier implements I_SessionNotifier{
 					else if (msgCounter == 0){
 						msgCounter++;
 						outputText.appendText("\n");
-						outputText.appendText("Playlist #: "+msg+"\n\n");
+						outputText.appendText("Modificaciones a la playlist: "+msg+"\n\n");
 					}
 					else {
 						msgCounter++;	// Son multiples mensajes que tengo que procesar
