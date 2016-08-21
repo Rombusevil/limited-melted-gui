@@ -17,6 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -65,6 +66,7 @@ public class Main extends Application implements Initializable {
 	private String unit = "U0"; // Default unit
 	private TelnetSession session;
 	private I_SessionNotifier notifier;
+	private Tooltip cleanBtnTooltip, removeBtnTooltip, wipeBtnTooltip;
 	
 	
 	//Start javafx app
@@ -102,6 +104,15 @@ public class Main extends Application implements Initializable {
 				
 		// Pongo como activa la tab de MEDIA
 		tabPane.getSelectionModel().select(1);
+
+		// Pongo algunos tooltips
+		cleanBtnTooltip = new Tooltip("Removes all but the playing clip.");
+		removeBtnTooltip= new Tooltip("Removes a clip from the specified clip index or\nposition relative to the currently playing clip index.");
+		wipeBtnTooltip	= new Tooltip("Removes all clips before the playing clip.");
+		
+		cleanBtn.setTooltip(cleanBtnTooltip);
+		removeBtn.setTooltip(removeBtnTooltip);
+		wipeBtn.setTooltip(wipeBtnTooltip);
 		
 		
 		// Defino los botones
