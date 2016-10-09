@@ -55,15 +55,25 @@
                <content>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
                      <children>
-                        <VBox layoutX="14.0" layoutY="10.0">
+                        <VBox layoutX="14.0" layoutY="10.0" prefHeight="177.0" prefWidth="826.0">
                            <children>
-                              <HBox prefHeight="35.0" prefWidth="582.0">
+                              <HBox>
                                  <children>
                                     <Label prefHeight="33.0" prefWidth="73.0" text="Producer" />
                                     <TextField fx:id="producerInput" minHeight="-Infinity" prefHeight="31.0" prefWidth="501.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin></TextField>
+                                    <Label prefHeight="33.0" prefWidth="33.0" text="Unit">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox fx:id="unitChoiceBox" prefHeight="31.0" prefWidth="42.0">
+                                       <HBox.margin>
+                                          <Insets top="1.0" />
+                                       </HBox.margin>
+                                    </ChoiceBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" />
@@ -71,12 +81,12 @@
                               </HBox>
                               <HBox prefHeight="19.0" prefWidth="582.0">
                                  <children>
-                                    <Button fx:id="loadBtn" mnemonicParsing="false" text="LOAD">
+                                    <Button fx:id="loadBtn" mnemonicParsing="false" prefWidth="55.0" text="LOAD">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="apndBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="APND" />
+                                    <Button fx:id="apndBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="APND" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="5.0" top="5.0" />
@@ -89,7 +99,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="pauseBtn" mnemonicParsing="false" text="PAUSE">
+                                    <Button fx:id="pauseBtn" mnemonicParsing="false" prefWidth="70.0" text="PAUSE">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -117,7 +127,7 @@
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="ustaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="USTA">
+                                    <Button fx:id="ustaBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="USTA">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
@@ -137,11 +147,6 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="shutdownBtn" mnemonicParsing="false" text="SHUTDOWN">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Button>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -149,6 +154,21 @@
                                  <padding>
                                     <Insets bottom="8.0" />
                                  </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="ulsBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="ULS">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="statusBtn" mnemonicParsing="false" prefWidth="70.0" text="STATUS" />
+                                    <Button fx:id="shutdownBtn" mnemonicParsing="false" text="SHUTDOWN">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
                               </HBox>
                            </children>
                         </VBox>
