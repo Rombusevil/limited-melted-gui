@@ -9,7 +9,6 @@ import javafx.scene.control.TextArea;
  * 20/08/2016 20:51:59
  */
 public class SessionNotifier implements I_SessionNotifier {
-
     private TextArea outputText;
     private I_SessionNotifier.Commands executedCommand;
     private int msgCounter; // Helper para interpretar respuestas que tienen más de un mensaje
@@ -42,7 +41,7 @@ public class SessionNotifier implements I_SessionNotifier {
 
                             if (msgs.length == 17) {	//Valido que haya sido OK la respuesta, si no tiene todos estos campos fue fail
                                 outputText.appendText("\n");
-                                //outputText.appendText("UNIT: "+msgs[0]+"\n"); // No lo muestro pq ya se que es la U0
+                                outputText.appendText("UNIT: "+msgs[0]+"\n");
                                 outputText.appendText("  mode:\t\t\t" + msgs[1] + "\n");
                                 outputText.appendText("  path:\t\t\t" + msgs[2] + "\n");
                                 outputText.appendText("  cur frame:\t\t" + msgs[3] + "\n");
@@ -83,7 +82,7 @@ public class SessionNotifier implements I_SessionNotifier {
 
                             if (msgs.length == 7) {	//Valido que haya sido OK la respuesta, si no tiene todos estos campos fue fail
                                 outputText.appendText("--------------------\n");
-                                outputText.appendText("  clip index:\t\t" + msgs[0] + "\n"); // No lo muestro pq ya se que es la U0
+                                outputText.appendText("  clip index:\t\t" + msgs[0] + "\n");
                                 outputText.appendText("  path:\t\t\t" + msgs[1] + "\n");
                                 outputText.appendText("  in-point:\t\t" + msgs[2] + "\n");
                                 outputText.appendText("  out-point:\t\t" + msgs[3] + "\n");

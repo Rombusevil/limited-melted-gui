@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -26,6 +28,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -94,12 +97,18 @@ public class Main extends Application implements Initializable {
     private Button statusBtn;
     @FXML
     private Button ulsBtn;
+    @FXML
+    private ListView<String> recentProducers;
+    @FXML
+    private ListView<String> recentCommands;
 
-    private static final String VERSION = "v1.0.0";
+    private static final String VERSION = "v1.0.1";
     private String unit = "U0"; // Default unit
     private TelnetSession session;
     private I_SessionNotifier notifier;
     private Tooltip cleanBtnTooltip, removeBtnTooltip, wipeBtnTooltip;
+    private final ObservableList<String> producersList = FXCollections.observableArrayList();
+    private final ObservableList<String> commandsList = FXCollections.observableArrayList();
 
     //Start javafx app
     public static void main(String[] args) {
@@ -146,9 +155,30 @@ public class Main extends Application implements Initializable {
         removeBtn.setTooltip(removeBtnTooltip);
         wipeBtn.setTooltip(wipeBtnTooltip);
 
+        // Sincronizo la lista de Producers Recientes con la producerList
+        recentProducers.setItems(producersList);
+        recentProducers.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() >= 2){
+                    String cur = recentProducers.getSelectionModel().getSelectedItem();
+                    producerInput.setText(cur);
+                }
+            }
+        });
+
+        // Sincronizo la lista de Comandos Recientes con la commandsList
+        recentCommands.setItems(commandsList);
+        recentCommands.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() >= 2){
+                    String cur = recentCommands.getSelectionModel().getSelectedItem();
+                    cmdInput.setText(cur);
+                }
+            }
+        });
 
         // Cargo el combo selector de unidad
-        unitChoiceBox.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10,11,12,13));
+        unitChoiceBox.setItems(FXCollections.observableArrayList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15));
         unitChoiceBox.setValue(0);
         unitChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Integer>(){
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
@@ -187,14 +217,18 @@ public class Main extends Application implements Initializable {
         loadBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                sendCommand("LOAD " + unit + " " + producerInput.getText().trim());
+                String clip = producerInput.getText().trim();
+                sendCommand("LOAD " + unit + " " + clip);
+                addToRecent(clip);
             }
         });
 
         apndBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                sendCommand("APND " + unit + " " + producerInput.getText().trim());
+                String clip = producerInput.getText().trim();
+                sendCommand("APND " + unit + " " + clip);
+                addToRecent(clip);
             }
         });
 
@@ -293,7 +327,9 @@ public class Main extends Application implements Initializable {
         sendCmdBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
-                sendCommand(cmdInput.getText().trim());
+                String cmd = cmdInput.getText().trim();
+                sendCommand(cmd);
+                addToRecentCmd(cmd);
             }
         });
 
@@ -341,6 +377,19 @@ public class Main extends Application implements Initializable {
             notifier.writeOutput("Not connected to melted!!!");
         }
     }
+
+    // Helper method for adding producers and commands to the recent list without duplicates
+    private void addToRecent(String path){
+        if(!producersList.contains(path)){
+            producersList.add(path);
+        }
+    }
+    private void addToRecentCmd(String cmd){
+        if(!commandsList.contains(cmd)){
+            commandsList.add(cmd);
+        }
+    }
+
 
     // Helper method for activating drag&drop on TextInputControl components.
     private void setDragDrop(final TextInputControl target, final boolean erasePreviousText) {
